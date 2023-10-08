@@ -1,0 +1,42 @@
+% !Mode:: "TeX:UTF-8"
+% !TEX program = xelatex
+% Modified: Wang Qi
+
+\documentclass[twoside, 12pt, openright,AutoFakeBold]{ctexbook}
+\input{tex/background/package}   % 引用均在这里 可以根据需要调整
+% ====== 页眉 =====  修改标题
+\fancypagestyle{myfancy}{%
+	\fancyhf{}	                                    % 清空所有定义
+	\fancyfoot[CE,CO]{\thepage}                     % 设置页脚为当前页码
+	\fancyhead[CE]{这里填写标题}        % 设置偶数页为标题
+	\fancyhead[CO]{\leftmark}
+    %\fancyhead[CO]{\nouppercase{\leftmark}}         % 设置奇数页居中的页眉为当前章节名
+    }
+%=================================正文内容=====================================================
+\begin{document}
+    \frontmatter                                	% 关闭章节序号， 页码默认使用小写罗马数字
+        \pagestyle{empty}                           % 设置封面和原创性声明的页面样式为空
+        \include{tex/background/1_cover_cn}                       % 载入中文封面
+         \include{tex/background/2_cover_en}                       % 载入英文封面
+        \pagestyle{plain}
+        \pagenumbering{Roman}						% 切换页码至大写罗马数字显示
+        \let\cleardoublepage\clearpage
+        \include{tex/background/3_abstract_cn}                 % 载入中文摘要
+
+        \include{tex/background/4_abstract_en}                 % 载入英文摘要
+        \pagestyle{plain}
+        \setcounter{page}{1}
+        \pagenumbering{Roman}        
+        \tableofcontents                    		% 载入目录
+        \clearpage									% 跳到目录下一页
+        \thispagestyle{plain}						% 显示最后一页的页码
+    \mainmatter                                 	% 开启章节序号计数，重置页码，页码使用阿拉伯数字
+        \fancypagestyle{plain}{\pagestyle{myfancy}} % 设置默认的页面类型plain为自定义样式fancy
+        \pagestyle{myfancy}							% 设置页面布局为自定义的myfancy
+        \include{tex/background/5_chapters}                    % 载入章节内容
+    \backmatter                                 	% 关闭章节序号，对页码没有影响
+        \include{tex/background/6_conclusion}                  % 载入总结
+        \include{tex/background/7_reference}					% 载入参考文献
+        \include{tex/background/8_Appendix}                      % 载入致谢
+        \include{tex/background/9_thanks}           	% 载入研究成果
+\end{document}
